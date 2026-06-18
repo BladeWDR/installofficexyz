@@ -1,0 +1,243 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Install Microsoft Office Products</title>
+
+    <style>
+      :root {
+        --bg: #0f172a;
+        --panel: #111827;
+        --text: #f8fafc;
+        --muted: #94a3b8;
+        --accent: #2563eb;
+        --border: #334155;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+      }
+
+      .hero {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .subtitle {
+        color: var(--muted);
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .command-box {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1rem;
+        margin: 2.5rem 0;
+      }
+
+      .command-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.75rem;
+      }
+
+      .command-title {
+        font-size: 0.9rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      button {
+        border: none;
+        background: var(--accent);
+        color: white;
+        padding: 0.65rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      button:hover {
+        opacity: 0.9;
+      }
+
+      pre {
+        margin: 0;
+        overflow-x: auto;
+      }
+
+      code {
+        font-size: 1.1rem;
+        color: #93c5fd;
+      }
+
+      .section {
+        margin-top: 2.5rem;
+      }
+
+      .section h2 {
+        margin-bottom: 0.5rem;
+      }
+
+      ul {
+        padding-left: 1.25rem;
+      }
+
+      .footer {
+        margin-top: 4rem;
+        color: var(--muted);
+        text-align: center;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="hero">
+        <h1>Install Microsoft Office 365 Products</h1>
+        <p class="subtitle">
+          A wrapper around Microsoft's Office Deployment Tool that simplifies
+          installing Microsoft 365 Apps, Project, Visio, and other Microsoft
+          Office products.
+        </p>
+        <br/>
+        <img src="365installtool.png" alt="Image of the tool in action"</img>
+      </div>
+
+      <div class="command-box">
+        <div class="command-header">
+          <span class="command-title">Quick Start</span>
+          <button onclick="copyCommand()">Copy</button>
+        </div>
+
+        <pre><code id="install-command">irm installoffice.xyz/setup | iex</code></pre>
+      </div>
+
+      <div class="section">
+        <h2>What It Does</h2>
+        <p>
+          InstallOffice provides an easier interface to the Microsoft Office
+          Deployment Tool (ODT). It generates the required configuration,
+          downloads Office directly from Microsoft, and installs the products
+          you specify.
+        </p>
+        <p>
+          The script itself is open source and can be found
+          <a
+            href="https://github.com/BladeWDR/scripts/blob/master/powershell/Install-MicrosoftOfficeODT.ps1"
+            >here.</a
+          >
+        </p>
+        <p>
+          The script downloads Office directly from Microsoft using their
+          official tools.
+        </p>
+        <p>
+          Several elements were borrowed from official Datto RMM / Kaseya
+          scripts.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>Supported Products</h2>
+        <ul>
+          <li>Microsoft 365 Apps for Business</li>
+          <li>Microsoft 365 Apps for Enterprise</li>
+          <li>Microsoft Project</li>
+          <li>Microsoft Visio</li>
+        </ul>
+
+        <p>More can be added upon request.</p>
+      </div>
+
+      <div class="section">
+        <h2>Usage</h2>
+
+        <p>When run without parameters, it will launch the graphical interface pictured above.</p>
+
+        <p><strong>The script needs to be run as Administrator!</strong></p>
+
+        <pre><code>irm installoffice.xyz/setup | iex</code></pre>
+
+        <p>You can also download the script and run it locally with parameters, as below:</p>
+
+        <pre><code>Install-Office `
+    -ProductIDs O365BusinessRetail,ProjectProRetail `
+    -UpdateChannel Current `
+    -Language MatchOS `
+    -CompanyName "Contoso"</code></pre>
+      </div>
+
+      <div class="section">
+        <h2>Parameters</h2>
+        <ul>
+          <li>
+            <strong>ProductIDs</strong> — Comma-separated list of Microsoft
+            product IDs to install.
+          </li>
+          <li>
+            <strong>UpdateChannel</strong> — Update channel to use. Defaults to
+            <code>Current</code>.
+          </li>
+          <li>
+            <strong>Language</strong> — Installation language. Defaults to
+            <code>MatchOS</code>.
+          </li>
+          <li>
+            <strong>CompanyName</strong> — Organization name shown in Office.
+            Defaults to <code>Office</code>.
+          </li>
+        </ul>
+      </div>
+      <div class="section">
+        <h2>AI Disclosure</h2>
+        <p>
+          I wrote most of the core script logic myself, but Claude helped me get
+          the WinForms GUI elements working quickly.
+          <br />
+          <br />
+          They also wrote the CSS for this website.
+        </p>
+      </div>
+    </div>
+
+    "
+
+    <script>
+      function copyCommand() {
+        navigator.clipboard.writeText("irm installoffice.xyz/setup | iex");
+
+        const btn = document.querySelector("button");
+        btn.textContent = "Copied!";
+        setTimeout(() => (btn.textContent = "Copy"), 2000);
+      }
+    </script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"8caf807f98df4c2bb9a564ed7d824556","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
