@@ -29,7 +29,6 @@ $OD_XML_PATH = "$TempDir\365config.xml"
 $ProductCatalog = [ordered]@{
   # Office 365 Business
   "Microsoft 365 Apps for Business"                    = "O365BusinessRetail"
-  "Microsoft 365 Business Standard"                    = "O365SmallBusPremRetail"
   # Office 365 Enterprise
   "Microsoft 365 Apps for Enterprise (ProPlus)"        = "O365ProPlusRetail"
   "Office 365 Enterprise E3"                           = "EnterprisePremiumRetail"
@@ -98,7 +97,6 @@ function Show-ProductSelector
   $Sections = [ordered]@{
     "Microsoft 365 for Business" = @(
       "Microsoft 365 Apps for Business"
-      "Microsoft 365 Business Standard"
     )
     "Office 365 Enterprise" = @(
       "Microsoft 365 Apps for Enterprise (ProPlus)"
