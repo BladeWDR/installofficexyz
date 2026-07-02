@@ -148,6 +148,33 @@ function Show-ProductSelector
 
   $yPos += 36
 
+  # -- Update Channel dropdown --
+  $ChannelLabel = New-Object System.Windows.Forms.Label
+  $ChannelLabel.Text = "Update Channel"
+  $ChannelLabel.Font = New-Object System.Drawing.Font("Segoe UI", 9, [System.Drawing.FontStyle]::Bold)
+  $ChannelLabel.ForeColor = [System.Drawing.Color]::FromArgb(0, 114, 198)
+  $ChannelLabel.AutoSize = $true
+  $ChannelLabel.Location = New-Object System.Drawing.Point(16, ($yPos + 6))
+  $Form.Controls.Add($ChannelLabel)
+
+  $ChannelCombo = New-Object System.Windows.Forms.ComboBox
+  $ChannelCombo.DropDownStyle = "DropDownList"
+  $ChannelCombo.Size = New-Object System.Drawing.Size(220, 24)
+  $ChannelCombo.Location = New-Object System.Drawing.Point(120, ($yPos + 4))
+  $ChannelCombo.Items.AddRange(@(
+    "Current",
+    "CurrentPreview",
+    "MonthlyEnterprise",
+    "SemiAnnualPreview",
+    "SemiAnnual",
+    "BetaChannel",
+    "LTSC"
+  ))
+  $ChannelCombo.SelectedItem = $script:UpdateChannel
+  $Form.Controls.Add($ChannelCombo)
+
+  $yPos += 36
+
   # -- Separator --
   $Separator = New-Object System.Windows.Forms.Panel
   $Separator.Size = New-Object System.Drawing.Size(480, 1)
@@ -206,8 +233,9 @@ function Show-ProductSelector
     }
 
     return [PSCustomObject]@{
-      ProductIDs  = @($Checkboxes.Values | Where-Object { $_.Checked } | ForEach-Object { $_.Tag })
-      CompanyName = $enteredCompany
+      ProductIDs    = @($Checkboxes.Values | Where-Object { $_.Checked } | ForEach-Object { $_.Tag })
+      CompanyName   = $enteredCompany
+      UpdateChannel = $ChannelCombo.SelectedItem
     }
   } else
   {
@@ -341,8 +369,9 @@ if ($ProductIDs.Count -eq 0 -or $null -eq $ProductIDs)
     Write-Host "Installation cancelled by user."
     exit 0
   }
-  $ProductIDs  = $GUIResult.ProductIDs
-  $CompanyName = $GUIResult.CompanyName
+  $ProductIDs    = $GUIResult.ProductIDs
+  $CompanyName   = $GUIResult.CompanyName
+  $UpdateChannel = $GUIResult.UpdateChannel
 }
 
 # Validate again post-GUI (defensive)
